@@ -3,19 +3,19 @@ package com.kim.biz.common;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.util.StopWatch;
 
-// around·Î »ç¿ëÇÒ advice´Â ¹İµå½Ã pjp¸¦ inputÀ¸·Î °¡Á®¾ßÇÑ´Ù!
-//  ex) ÇÊÅÍ ¼­ºí¸´ Å¬·¡½º
+// aroundë¡œ ì‚¬ìš©í•  adviceëŠ” ë°˜ë“œì‹œ pjpë¥¼ inputìœ¼ë¡œ ê°€ì ¸ì•¼í•œë‹¤!
+//  ex) í•„í„° ì„œë¸”ë¦¿ í´ë˜ìŠ¤
 public class AroundAdvice {
 	public Object printLogAround(ProceedingJoinPoint pjp) throws Throwable {
 		String methodName=pjp.getSignature().getName();
-		System.out.println("¼öÇàÁßÀÎ ÇÙ½É¸Ş¼­µå¸í: "+methodName);
+		System.out.println("ìˆ˜í–‰ì¤‘ì¸ í•µì‹¬ë©”ì„œë“œëª…: "+methodName);
 		
 		StopWatch sw=new StopWatch();
 		sw.start();
-		Object returnObj=pjp.proceed(); // ¼öÇàÇØ¾ßÇÒ Æ÷ÀÎÆ®ÄÆ
-		// pjp.proceed()¿¡ ÀÇÇØ ºñÁî´Ï½º¸Ş¼­µå°¡ ¼öÇàµÊ!
+		Object returnObj=pjp.proceed(); // ìˆ˜í–‰í•´ì•¼í•  í¬ì¸íŠ¸ì»·
+		// pjp.proceed()ì— ì˜í•´ ë¹„ì¦ˆë‹ˆìŠ¤ë©”ì„œë“œê°€ ìˆ˜í–‰ë¨!
 		sw.stop();
-		System.out.println("¼öÇà½Ã°£: "+sw.getTotalTimeMillis()+"ms");
+		System.out.println("ìˆ˜í–‰ì‹œê°„: "+sw.getTotalTimeMillis()+"ms");
 		
 		return returnObj;
 	}

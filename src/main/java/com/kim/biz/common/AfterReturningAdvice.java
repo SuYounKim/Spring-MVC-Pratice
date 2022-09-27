@@ -9,8 +9,8 @@ public class AfterReturningAdvice {
 		String methodName=jp.getSignature().getName();
 		Object[] args=jp.getArgs();
 		
-		System.out.println("¼öÇàÁßÀÎ ÇÙ½É¸Ş¼­µå¸í: "+methodName);
-		System.out.println("»ç¿ëÇÏ´Â ÀÎÀÚ");
+		System.out.println("ìˆ˜í–‰ì¤‘ì¸ í•µì‹¬ë©”ì„œë“œëª…: "+methodName);
+		System.out.println("ì‚¬ìš©í•˜ëŠ” ì¸ì");
 		System.out.println("=====");
 		for(Object v:args) {
 			System.out.println(v);
@@ -20,12 +20,12 @@ public class AfterReturningAdvice {
 		if(returnObj instanceof MemberVO) {
 			MemberVO mvo=(MemberVO)returnObj;
 			if(mvo.getRole().equals("ADMIN")) {
-				System.out.println("°ü¸®ÀÚÀÔ´Ï´Ù.");
+				System.out.println("ê´€ë¦¬ìì…ë‹ˆë‹¤.");
 			}
 			else {
-				System.out.println("ÀÏ¹İ°èÁ¤ÀÔ´Ï´Ù.");
+				System.out.println("ì¼ë°˜ê³„ì •ì…ë‹ˆë‹¤.");
 			}
 		}
-		System.out.println("ÇÙ½É¸Ş¼­µåÀÇ ¹İÈ¯°ª: "+returnObj);
+		System.out.println("í•µì‹¬ë©”ì„œë“œì˜ ë°˜í™˜ê°’: "+returnObj);
 	}
 }

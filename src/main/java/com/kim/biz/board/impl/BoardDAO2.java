@@ -16,13 +16,15 @@ public class BoardDAO2 {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-	
+
 	final String sql_selectOne="SELECT * FROM BOARD WHERE BID=?";
 	final String sql_selectAll="SELECT * FROM BOARD ORDER BY BID DESC";
 	final String sql_insert="INSERT INTO BOARD(BID,TITLE,WRITER,CONTENT) VALUES((SELECT NVL(MAX(BID),0)+1 FROM BOARD),?,?,?)";
 	final String sql_update="UPDATE BOARD SET TITLE=?,CONTENT=? WHERE BID=?";
 	final String sql_delete="DELETE BOARD WHERE BID=?";
-	
+	final String sql_selectAll_T="SELECT * FROM BOARD WHERE TITLE LIKE '%'||?||'%' ORDER BY BID DESC";
+	final String sql_selectAll_w="SELECT * FROM BOARD WHERE WRITER LIKE '%'||?||'%' ORDER BY BID DESC";
+
 	void insertBoard(BoardVO vo) {
 		jdbcTemplate.update(sql_insert,vo.getTitle(),vo.getWriter(),vo.getContent());
 	}
@@ -37,9 +39,17 @@ public class BoardDAO2 {
 		return jdbcTemplate.queryForObject(sql_selectOne,args,new BoardRowMapper());
 	}
 	List<BoardVO> selectAllBoard(BoardVO vo) {
+		if(vo.getTitle()!=null) {
+			Object[] args= {vo.getTitle()};
+			return jdbcTemplate.query(sql_selectAll_T,args,new BoardRowMapper());
+		}else if(vo.getWriter()!=null) {
+			Object[] args= {vo.getWriter()};
+			return jdbcTemplate.query(sql_selectAll_w,args,new BoardRowMapper());
+		}
 		return jdbcTemplate.query(sql_selectAll,new BoardRowMapper());
 	}
 }
+
 class BoardRowMapper implements RowMapper<BoardVO>{
 
 	@Override
@@ -53,5 +63,5 @@ class BoardRowMapper implements RowMapper<BoardVO>{
 		data.setRegdate(rs.getString("REGDATE"));
 		return data;
 	}
-	
+
 }

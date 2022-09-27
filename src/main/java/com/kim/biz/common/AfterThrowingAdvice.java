@@ -14,27 +14,27 @@ public class AfterThrowingAdvice {
 		String methodName=jp.getSignature().getName();
 		Object[] args=jp.getArgs();
 		
-		System.out.println("¼öÇàÁßÀÎ ÇÙ½É¸Ş¼­µå¸í: "+methodName);
-		System.out.println("»ç¿ëÇÏ´Â ÀÎÀÚ");
+		System.out.println("ìˆ˜í–‰ì¤‘ì¸ í•µì‹¬ë©”ì„œë“œëª…: "+methodName);
+		System.out.println("ì‚¬ìš©í•˜ëŠ” ì¸ì");
 		System.out.println("=====");
 		for(Object v:args) {
 			System.out.println(v);
 		}
 		System.out.println("=====");
 				
-		System.out.println("¹ß»ıÇÑ ¿¹¿Ü: "+exceptObj.getMessage());
+		System.out.println("ë°œìƒí•œ ì˜ˆì™¸: "+exceptObj.getMessage());
 		if(exceptObj instanceof IllegalArgumentException) {
-			System.out.println("¿Ã¹Ù¸£Áö¾ÊÀº ÀÎÀÚ°ªÀ» »ç¿ëÇß½À´Ï´Ù...");
+			System.out.println("ì˜¬ë°”ë¥´ì§€ì•Šì€ ì¸ìê°’ì„ ì‚¬ìš©í–ˆìŠµë‹ˆë‹¤...");
 		}
 		else if(exceptObj instanceof NumberFormatException) {
-			System.out.println("¼ıÀÚ Çü½ÄÀÌ ¾Æ´Ñ °ªÀ» »ç¿ëÇß½À´Ï´Ù...");
-			// 12,000 -> , °ø¹éÀ¸·Î replace() Ã³¸®ÇØ¼­ »ç¿ëÇØºÁ~~
+			System.out.println("ìˆ«ì í˜•ì‹ì´ ì•„ë‹Œ ê°’ì„ ì‚¬ìš©í–ˆìŠµë‹ˆë‹¤...");
+			// 12,000 -> , ê³µë°±ìœ¼ë¡œ replace() ì²˜ë¦¬í•´ì„œ ì‚¬ìš©í•´ë´~~
 		}
 		else if(exceptObj instanceof Exception) {
-			System.out.println("¿¹¿Ü°¡ ¹ß»ıÇß½À´Ï´Ù...");
+			System.out.println("ì˜ˆì™¸ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤...");
 		}
 		else {
-			System.out.println("È®ÀÎµÇÁö¾ÊÀº ¿¡·¯°¡ ¹ß»ıÇß½À´Ï´Ù!!!");
+			System.out.println("í™•ì¸ë˜ì§€ì•Šì€ ì—ëŸ¬ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤!!!");
 		}
 	}
 }

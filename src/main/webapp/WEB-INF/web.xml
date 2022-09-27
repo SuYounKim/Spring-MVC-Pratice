@@ -21,4 +21,14 @@
      <filter-name>characterEncodingFilter</filter-name>
      <url-pattern>*.do</url-pattern>
   </filter-mapping>
+  <!-- /WEB-INF/applicationContext.xml 설정파일이 필요 -> 다른 파일에 이미 있으니까 참조하도록 하는 코드 -->
+    <context-param>
+     <param-name>contextConfigLocation</param-name>
+     <param-value>classpath:applicationContext.xml</param-value>
+  </context-param>
+  <!-- ContextLoaderListener 리스너 등록 -->
+   <listener>
+     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  
 </web-app>

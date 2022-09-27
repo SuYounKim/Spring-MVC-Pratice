@@ -20,8 +20,8 @@ public class MemberDAO2 {
 	final String sql_selectOne="SELECT * FROM MEMBER WHERE MID=? AND MPW=?";
 	final String sql_selectAll="SELECT * FROM MEMBER";
 	final String sql_insert="INSERT INTO MEMBER VALUES(?,?,?,?)";
-	final String sql_update="UPDATE MEMBER SET MPW=? WHERE MID=?";
-	final String sql_delete="DELETE MEMBER WHERE MID=? AND MPW=?";
+	final String sql_update="UPDATE MEMBER SET MPW=? , NAME=?, ROLE=? WHERE MID=?";
+	final String sql_delete="DELETE MEMBER WHERE MID=?";
 	
 	void insertMember(MemberVO vo) {
 		jdbcTemplate.update(sql_insert,vo.getMid(),vo.getMpw(),vo.getName(),vo.getRole());
@@ -30,7 +30,7 @@ public class MemberDAO2 {
 		jdbcTemplate.update(sql_delete,vo.getMid(),vo.getMpw());
 	}
 	void updateMember(MemberVO vo) {
-		jdbcTemplate.update(sql_update,vo.getMpw(),vo.getMid());
+		jdbcTemplate.update(sql_update,vo.getMpw(),vo.getMid(),vo.getName());
 	}
 	MemberVO selectOneMember(MemberVO vo) {
 		Object[] args= {vo.getMid(),vo.getMpw()};

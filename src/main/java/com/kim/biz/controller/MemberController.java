@@ -2,26 +2,32 @@ package com.kim.biz.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+
+import com.kim.biz.member.MemberService;
 import com.kim.biz.member.MemberVO;
-import com.kim.biz.member.impl.MemberDAO;
+
 
 @Controller
 @SessionAttributes("member")//member라는 정보가 Model에 add되면 session에 저장해라!! 
 public class MemberController {
+	
+	@Autowired
+	private MemberService memberService; //비즈니스 컴포넌트. DAO를 직접 이용 XXX 
 
 	@RequestMapping(value="/login.do",method=RequestMethod.GET)
 	public String index() {
 		return "login.jsp";
 	}
 	@RequestMapping(value="/login.do",method=RequestMethod.POST)
-	public String selectOneMember(MemberVO mVO,MemberDAO mDAO, HttpSession session, Model model) {
-		mVO=mDAO.selectOneMember(mVO);
+	public String selectOneMember(MemberVO mVO, HttpSession session, Model model) {
+		mVO=memberService.selectOneMember(mVO);
 		
 		if(mVO==null) {
 			return "redirect:login.jsp";
@@ -39,39 +45,36 @@ public class MemberController {
 	}
 
 	@RequestMapping("/mypage.do")
-	public String mypageselectOne(@ModelAttribute("member")MemberVO mVO,MemberDAO mDAO,Model model) {
+	public String mypageselectOne(@ModelAttribute("member")MemberVO mVO,Model model) {
 		/* mVO =(MemberVO)session.getAttribute("userId"); */
-		mVO = mDAO.selectOneMember(mVO);
+		mVO = memberService.selectOneMember(mVO);
 		
 		 model.addAttribute("member", mVO); 
 		return "mypage.jsp";
 	}
 	
 	@RequestMapping("/update.do")
-	public  String mypageupdate(@ModelAttribute("member")MemberVO mVO,MemberDAO mDAO) {
+	public  String mypageupdate(@ModelAttribute("member")MemberVO mVO) {
 		//원래 존재하던 member를 set해주고, 변경되는 정보는 그 뒤에 set! 
 		System.out.println("update로그 :" + mVO);
-		 mDAO.updateMember(mVO);
+		memberService.updateMember(mVO);
 		//만약 변경사항이 있다면 새로운 정보로 덮어씌워줌! 
 		
 		return "main.do";
 	}
 
 	@RequestMapping("/signin.do")
-	public String signin(MemberVO mVO,MemberDAO mDAO) {
+	public String signin(MemberVO mVO) {
 		
-		 mDAO.insertMember(mVO);
+		memberService.insertMember(mVO);
 		return "login.jsp";
 	}
 	
 	@RequestMapping("/delete.do")
-	public String memberdelete(@ModelAttribute("member")MemberVO mVO, MemberDAO mDAO) {
+	public String memberdelete(@ModelAttribute("member")MemberVO mVO) {
 		/* mVO =(MemberVO)session.getAttribute("userId"); */
-		mDAO.deleteMember(mVO);
+		memberService.deleteMember(mVO);
 		/* session.invalidate(); */
 		return "login.jsp";
 	}
-	
-	
-	
 }

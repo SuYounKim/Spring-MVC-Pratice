@@ -11,12 +11,12 @@ public class LogAdvice {
 	@Before("PointcutCommon.aPointcut()")
 	public void printLog(JoinPoint jp) {
 		String methodName=jp.getSignature().getName();
-		// ÇöÀç ¼öÇàÁßÀÎ Æ÷ÀÎÆ®ÄÆ(ÇÙ½É·ÎÁ÷,CRUD)ÀÇ ¸Ş¼­µå¸í
+		// í˜„ì¬ ìˆ˜í–‰ì¤‘ì¸ í¬ì¸íŠ¸ì»·(í•µì‹¬ë¡œì§,CRUD)ì˜ ë©”ì„œë“œëª…
 		Object[] args=jp.getArgs();
-		// ÇöÀç ¼öÇàÁßÀÎ Æ÷ÀÎÆ®ÄÆ(ÇÙ½É·ÎÁ÷,CRUD)ÀÌ »ç¿ëÇÏ´Â ÀÎÀÚµéÀÇ Á¤º¸
+		// í˜„ì¬ ìˆ˜í–‰ì¤‘ì¸ í¬ì¸íŠ¸ì»·(í•µì‹¬ë¡œì§,CRUD)ì´ ì‚¬ìš©í•˜ëŠ” ì¸ìë“¤ì˜ ì •ë³´
 		
-		System.out.println("¼öÇàÁßÀÎ ÇÙ½É¸Ş¼­µå¸í: "+methodName);
-		System.out.println("»ç¿ëÇÏ´Â ÀÎÀÚ");
+		System.out.println("ìˆ˜í–‰ì¤‘ì¸ í•µì‹¬ë©”ì„œë“œëª…: "+methodName);
+		System.out.println("ì‚¬ìš©í•˜ëŠ” ì¸ì");
 		System.out.println("=====");
 		for(Object v:args) {
 			System.out.println(v);

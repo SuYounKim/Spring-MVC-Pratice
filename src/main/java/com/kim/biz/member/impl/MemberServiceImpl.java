@@ -11,8 +11,8 @@ import com.kim.biz.member.MemberVO;
 @Service("memberService")
 public class MemberServiceImpl implements MemberService {
 
-	@Autowired // MemberDAO Ÿ���� ��ü�� �޸𸮿� �־������ DI(������ ����) ������!
-	private MemberDAO2 memberDAO; // �ٽɷ����� ������ ��ü
+	@Autowired//component를 상속받은 어노케이션은 service를 사용
+	private MemberDAO2 memberDAO; 
 	
 	@Override
 	public boolean insertMember(MemberVO vo) {
@@ -33,7 +33,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public MemberVO selectOneMember(MemberVO vo) {
 		if(vo.getMid().equals("timo")) {
-			throw new IllegalArgumentException("[����ÿ���]");
+			throw new IllegalArgumentException("[실행시예외]");
 		}
 		return memberDAO.selectOneMember(vo);
 	}
